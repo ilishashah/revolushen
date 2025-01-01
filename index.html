@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolushen</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fefefe;
+        }
+        img {
+            width: 100%;
+            height: 100vh; /* Make the image cover the full viewport height */
+            object-fit: cover; /* Ensure the image covers the screen without stretching */
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            z-index: 10; /* Ensure buttons are above the images */
+            opacity: 0; /* Initially hidden for animation */
+            transform: translateY(-50px); /* Position the buttons slightly above initially */
+            animation: slideIn 1s forwards; /* Add sliding animation */
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px); /* Start position */
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0); /* End position */
+            }
+        }
+        .buttons a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #FFC0CB;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .buttons a:hover {
+            background-color: #ff8ba7;
+        }
+        .back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            z-index: 20; /* Ensure the back button is on top of the images */
+            font-size: 18px; /* Make the text larger for better visibility */
+        }
+        .back:hover {
+            background-color: rgba(0, 0, 0, 0.9); /* Darker when hovering */
+        }
+        /* Add fade-in animation to each page */
+        .page {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Home Page -->
+    <div id="home" class="page" style="display: block;">
+        <img src="1.png" alt="Home Page">
+        <h1>RevoluSHEn</h1>
+        <div class="buttons">
+            <a href="#cofounders">Co-Founders</a>
+            <a href="#ourstory">Our Story</a>
+            <a href="#ouraim">Our Aim</a>
+            <a href="#howyoucanhelp">How You Can Help Us</a>
+            <a href="#changeswemade">Changes We&#39;ve Made</a>
+            <a href="#contactus">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Co-Founders Page -->
+    <div id="cofounders" class="page">
+        <img src="2.png" alt="Co-Founders Page">
+        <div class="back">
+            <a href="#home">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Our Story Page -->
+    <div id="ourstory" class="page">
+        <img src="3.png" alt="Our Story Page">
+        <div class="back">
+            <a href="#home">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Our Aim Page -->
+    <div id="ouraim" class="page">
+        <img src="4.png" alt="Our Aim Page">
+        <div class="back">
+            <a href="#home">Back to Home</a>
+        </div>
+    </div>
+
+  <!-- How You Can Help Us Page -->
+<div id="howyoucanhelp" style="display:none; position: relative; text-align: center; height: 100vh; overflow: hidden;">
+    <img src="5.png" alt="How You Can Help Us Page" style="width: 100%; height: 100%; object-fit: cover;">
+    <a id="helpLink" href="https://docs.google.com/forms/d/e/1FAIpQLSc5QKYRLyVQycOMH6wr8e8OhK_iffUw7w19JJtZD3x_9QOfog/viewform" 
+       style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 20px; font-weight: bold; text-decoration: none; background-color: rgba(0, 0, 0, 0.5); padding: 10px 20px; border-radius: 5px;">
+        Click here to help!
+    </a>
+    <div class="back">
+        <a href="#home">Back to Home</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('helpLink').addEventListener('click', function(event) {
+        window.open(this.href, '_blank');
+        event.preventDefault(); // Prevent default link action to handle the click via JavaScript
+    });
+</script>
+
+
+    <!-- Changes We've Made Page -->
+    <div id="changeswemade" class="page">
+        <img src="6.png" alt="Changes We&#39;ve Made Page">
+        <div class="back">
+            <a href="#home">Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Contact Us Page -->
+    <div id="contactus" class="page">
+        <img src="7.png" alt="Contact Us Page">
+        <div class="back">
+            <a href="#home">Back to Home</a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle navigation with transition
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                const target = event.target.getAttribute('href').substring(1);
+
+                // Hide all pages and reset opacity to 0 for fade effect
+                document.querySelectorAll('.page').forEach(section => {
+                    section.style.display = 'none';
+                    section.style.opacity = 0;
+                });
+
+                // Display the selected page and apply fade-in effect
+                const targetPage = document.getElementById(target);
+                targetPage.style.display = 'block';
+                targetPage.style.animation = 'fadeIn 1s forwards';
+            });
+        });
+
+        // Display the home section by default
+        document.getElementById('home').style.display = 'block';
+    </script>
+
+</body>
+</html>
